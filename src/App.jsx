@@ -5,7 +5,7 @@ import ReactConfetti from "react-confetti";
 
 function App() {
 
-  const[numbers, setNumbers] = useState(allNewNumbers())
+  const[numbers, setNumbers] = useState(() => allNewNumbers())
 
   const gameWon = numbers.every(e => e.isFixed) && numbers.every(e => e.num === numbers[0].num)
 
@@ -19,7 +19,7 @@ function App() {
 
   function handleDiceRoll(){
     if(gameWon){
-      setNumbers(allNewNumbers());
+      setNumbers(() => allNewNumbers());
       return;
     }
     const arr = numbers.map(e => {
