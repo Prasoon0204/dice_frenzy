@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Die from "./components/Die"
 import { nanoid } from "nanoid";
+import ReactConfetti from "react-confetti";
 
 function App() {
 
@@ -17,6 +18,10 @@ function App() {
   }
 
   function handleDiceRoll(){
+    if(gameWon){
+      setNumbers(allNewNumbers());
+      return;
+    }
     const arr = numbers.map(e => {
       if(e.isFixed === false) e.num =  Math.ceil(Math.random()*6);
       return e
@@ -34,6 +39,7 @@ function App() {
 
   return (
     <>
+      {gameWon && <ReactConfetti />}
       <main className="flex justify-center items-center w-full min-h-screen bg-[#0B2434]">
         <div className="bg-[#F5F5F5] flex flex-col justify-evenly items-center w-[90vw] h-[80vh] rounded-xl">
         <h1 className="text-5xl font-bold">Dice Frenzy</h1>
